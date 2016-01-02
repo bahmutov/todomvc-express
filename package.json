@@ -1,0 +1,38 @@
+{
+  "name": "todomvc-express",
+  "version": "1.0.0",
+  "description": "TodoMVC with server-side rendering ",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run lint",
+    "lint": "standard *.js src/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bahmutov/todomvc-express.git"
+  },
+  "keywords": [
+    "todo",
+    "todos",
+    "todomvc",
+    "backend",
+    "example",
+    "express",
+    "node",
+    "expressjs"
+  ],
+  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bahmutov/todomvc-express/issues"
+  },
+  "homepage": "https://github.com/bahmutov/todomvc-express#readme",
+  "dependencies": {
+    "check-more-types": "2.10.0",
+    "express": "4.13.3",
+    "lazy-ass": "1.3.0"
+  },
+  "devDependencies": {
+    "standard": "5.4.1"
+  }
+}
