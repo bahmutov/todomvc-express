@@ -53,6 +53,13 @@ function addTodo (req, res) {
 
 function deleteTodo (req, res) {
   console.log('deleting todo', req.body.id)
+
+  // sync for now
+  if (is.unemptyString(req.body.id)) {
+    const db = require('./db')
+    db.deleteTodo(req.body.id)
+  }
+
   res.redirect('/')
 }
 

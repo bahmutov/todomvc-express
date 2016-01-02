@@ -20,6 +20,12 @@ function loadTodos () {
   return items
 }
 
+function saveTodos (items) {
+  la(is.array(items), 'expected list of items, not', items)
+  fs.writeFileSync(todosPath, JSON.stringify(items, null, 2), 'utf-8')
+  console.log('saved list with %d item(s)', items.length)
+}
+
 function addTodo (what) {
   const todos = loadTodos()
   la(is.array(todos), 'expected list of todos', todos)
@@ -28,11 +34,28 @@ function addTodo (what) {
   la(is.object(newTodo), 'could not create todo from', what, 'got', newTodo)
   todos.push(newTodo)
 
-  fs.writeFileSync(todosPath, JSON.stringify(todos, null, 2), 'utf-8')
-  console.log('added todo "%s" total %d', what, todos.length)
+  saveTodos(todos)
+}
+
+function deleteTodo (id) {
+  la(is.unemptyString(id), 'expected id', id)
+  const todos = loadTodos()
+  la(is.array(todos), 'expected list of todos', todos)
+
+  const filtered = todos.filter(function (todo) {
+    return todo.id !== id
+  })
+
+  if (filtered.length === todos.length) {
+    console.log('could not find todo with id', id)
+    return
+  }
+
+  saveTodos(filtered)
 }
 
 module.exports = {
   loadTodos: loadTodos,
-  addTodo: addTodo
+  addTodo: addTodo,
+  deleteTodo: deleteTodo
 }

@@ -8,6 +8,7 @@ const header = [
   '<html lang="en">',
   '<head>',
   '<meta charset="utf-8">',
+  '<meta http-equiv="Content-Security-Policy" content="script-src \'none\';">',
   '<title>TodoMVC</title>',
   '<link rel="stylesheet" href="app.css">',
   '</style>',
