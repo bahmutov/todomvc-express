@@ -1,4 +1,4 @@
-const render = require('virtual-todos')
+const render = require('./render/render')
 const Todos = require('todomvc-model')
 const toHTML = require('vdom-to-html')
 const beautify = require('js-beautify').html
@@ -20,19 +20,10 @@ const footer = [
   '</html>'
 ].join('\n')
 
-function loadTodos () {
-  const join = require('path').join
-  const exists = require('fs').existsSync
-  const todosPath = join(process.cwd(), 'todos.json')
-  if (!exists(todosPath)) {
-    return []
-  }
-  const text = require('fs').readFileSync(todosPath, 'utf-8')
-  return JSON.parse(text)
-}
+const db = require('./db')
 
 function renderIndexPage () {
-  Todos.items = loadTodos()
+  Todos.items = db.loadTodos()
   const rendered = render(Todos)
   const todosMarkup = beautify(toHTML(rendered), { indent_size: 2 })
   return header + '\n' + todosMarkup + '\n' + footer

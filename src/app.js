@@ -1,5 +1,10 @@
 const express = require('express')
 const app = express()
+const is = require('check-more-types')
+
+var bodyParser = require('body-parser')
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 const aboutPage = [
   '<!DOCTYPE html>',
@@ -30,8 +35,23 @@ function sendAppCss (req, res) {
   res.send(css)
 }
 
+function addTodo (req, res, next) {
+  console.log('adding new todo')
+  console.log('post params', req.body)
+
+  // sync for now
+  if (is.unemptyString(req.body.what)) {
+    const db = require('./db')
+    db.addTodo(req.body.what)
+  }
+
+  next()
+}
+
 app.get('/', sendIndexPage)
 app.get('/app.css', sendAppCss)
 app.get('/about', sendAboutPage)
+
+app.post('/', addTodo, sendIndexPage)
 
 module.exports = app
