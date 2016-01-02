@@ -5,12 +5,7 @@ function render (Todos) {
   return h('section', {className: 'main'}, [
     h('input', {
       className: 'toggle-all',
-      type: 'checkbox',
-      onclick: function (e) {
-        console.log('nothing')
-        // Todos.mark(e.target.checked);
-        // renderApp();
-      }
+      type: 'checkbox'
     }),
     h('label', {htmlFor: 'toggle-all'}, 'Mark all as complete'),
     h('ul', {className: 'todo-list'},

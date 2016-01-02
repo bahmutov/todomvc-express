@@ -1,10 +1,14 @@
 const express = require('express')
 const app = express()
 const is = require('check-more-types')
+const methodOverride = require('method-override')
 
 var bodyParser = require('body-parser')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+
+// override with POST having ?_method=DELETE
+app.use(methodOverride('_method'))
 
 const aboutPage = [
   '<!DOCTYPE html>',
@@ -35,7 +39,7 @@ function sendAppCss (req, res) {
   res.send(css)
 }
 
-function addTodo (req, res, next) {
+function addTodo (req, res) {
   console.log('adding new todo')
   console.log('post params', req.body)
 
@@ -44,14 +48,20 @@ function addTodo (req, res, next) {
     const db = require('./db')
     db.addTodo(req.body.what)
   }
+  res.redirect('/')
+}
 
-  next()
+function deleteTodo (req, res) {
+  console.log('deleting todo', req.body.id)
+  res.redirect('/')
 }
 
 app.get('/', sendIndexPage)
 app.get('/app.css', sendAppCss)
 app.get('/about', sendAboutPage)
 
-app.post('/', addTodo, sendIndexPage)
+app.post('/', addTodo)
+
+app.delete('/', deleteTodo)
 
 module.exports = app

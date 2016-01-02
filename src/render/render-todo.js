@@ -12,13 +12,21 @@ function render (Todos, todo) {
         }
       }),
       h('label', todo.what),
-      h('button', {
-        className: 'destroy',
-        onclick: function (e) {
-          console.log('nothing')
-          Todos.remove(todo)
-        }
-      })
+      h('form', {
+        method: 'POST',
+        action: '/?_method=DELETE',
+        enctype: 'application/x-www-form-urlencoded'
+      }, [
+        h('input', {
+          type: 'hidden',
+          name: 'id',
+          value: todo.id
+        }),
+        h('button', {
+          className: 'destroy',
+          type: 'submit'
+        })
+      ])
     ])
   ])
 }
