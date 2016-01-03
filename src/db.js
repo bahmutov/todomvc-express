@@ -9,10 +9,16 @@ const todoFactory = require('todomvc-model').utils.factory
 
 la(is.fn(todoFactory), 'missing todo factory')
 
+// returns a couple of fake todos to seed the list
+function initialTodos () {
+  const faker = require('fake-todos')
+  return faker(2)
+}
+
 function loadTodos () {
   if (!exists(todosPath)) {
     console.log('Cannot find todos file, returning new list')
-    return []
+    return saveTodos(initialTodos())
   }
   const text = fs.readFileSync(todosPath, 'utf-8')
   const items = JSON.parse(text)
@@ -24,6 +30,7 @@ function saveTodos (items) {
   la(is.array(items), 'expected list of items, not', items)
   fs.writeFileSync(todosPath, JSON.stringify(items, null, 2), 'utf-8')
   console.log('saved list with %d item(s)', items.length)
+  return items
 }
 
 function addTodo (what) {
