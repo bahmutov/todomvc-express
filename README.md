@@ -21,6 +21,16 @@ and the page will still work just fine.
 
 Any new todo, or click leads to the form submission and new page rendering.
 
+## Use
+
+You can clone this repo and start the server locally
+
+    npm start
+
+The open `localhost:3000` to play with the application. Local data is saved in `todos.json`.
+The Express server itself is defined in file [src/app.js](src/app.js) that you can reuse from
+other environments
+
 ## Related
 
 I have written a couple of modules that help with TodoMVC applications.
