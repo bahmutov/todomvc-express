@@ -11,10 +11,13 @@ might be asleep, wait 10 seconds. Does not permanently store todos; they disappe
 the dyno goes to sleep.
 
 Complete server-side rendering for TodoMVC using [ExpressJS](http://expressjs.com/) 
-server and [virtual-dom](https://github.com/Matt-Esch/virtual-dom). In fact, NO client side
+server and [virtual-dom](https://github.com/Matt-Esch/virtual-dom). 
+
+In fact, NO client side
 JavaScript is allowed using 
 [Content Security Policy](https://glebbahmutov.com/blog/disable-inline-javascript-for-security/)
-setting in the page "meta" tag (view page source).
+setting in the page "meta" tag (view page source). You can disable JavaScript in your browser
+and the page will still work just fine.
 
 Any new todo, or click leads to the form submission and new page rendering.
 

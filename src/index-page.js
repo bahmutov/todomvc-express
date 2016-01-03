@@ -16,7 +16,8 @@ const header = [
   '<body>',
   '<p>This is server-side rendering TodoMVC example.',
   'Only adding new todos (type and click Enter), removing and marking done',
-  'are supported.</p>'
+  'are supported.</p>',
+  '<p><strong>This page works perfectly with browser JavaScript disabled</strong></p>.'
 ].join('\n')
 
 const footer = [
