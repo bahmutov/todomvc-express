@@ -20,6 +20,8 @@ const header = [
 ].join('\n')
 
 const footer = [
+  '<p>Implemented by Gleb Bahmutov <a href="https://twitter.com/bahmutov">@bahmutov</a>',
+  'source at <a href="https://github.com/bahmutov/todomvc-express">bahmutov/todomvc-express</a>.</p>',
   '</body>',
   '</html>'
 ].join('\n')
