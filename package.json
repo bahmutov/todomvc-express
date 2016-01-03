@@ -1,16 +1,18 @@
 {
   "name": "todomvc-express",
-  "version": "1.0.0",
   "description": "TodoMVC with server-side rendering ",
-  "main": "src/start.js",
+  "version": "0.0.0-semantic-release",
+  "main": "src/app.js",
   "scripts": {
     "test": "npm run lint",
     "lint": "standard *.js src/**/*.js",
-    "start": "node --harmony src/start.js"
+    "start": "node --harmony src/start.js",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "commit": "commit-wizard"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bahmutov/todomvc-express.git"
+    "url": "https://github.com/bahmutov/todomvc-express.git"
   },
   "keywords": [
     "todo",
@@ -21,6 +23,9 @@
     "express",
     "node",
     "expressjs"
+  ],
+  "files": [
+    "src"
   ],
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "license": "MIT",
@@ -41,6 +46,17 @@
     "virtual-todos": "1.2.0"
   },
   "devDependencies": {
+    "pre-git": "3.1.2",
+    "semantic-release": "^4.3.5",
     "standard": "5.4.1"
+  },
+  "config": {
+    "pre-git": {
+      "commit-msg": ["simple"],
+      "pre-commit": ["npm run lint", "npm test"],
+      "pre-push": [],
+      "post-commit": [],
+      "post-merge": []
+    }
   }
 }
