@@ -5,15 +5,16 @@ const footer = require('./render-footer')
 const la = require('lazy-ass')
 const is = require('check-more-types')
 
-const isTodos = is.schema({
-  items: is.array,
-  clearCompleted: is.fn,
-  add: is.fn,
-  mark: is.fn,
-  remove: is.fn
-})
+// const isTodos = is.schema({
+//   items: is.array,
+//   clearCompleted: is.fn,
+//   add: is.fn,
+//   mark: is.fn,
+//   remove: is.fn
+// })
 
 function render (Todos) {
+  la(is.object(Todos), 'expected todos object', Todos)
   // la(isTodos(Todos), 'Todos has incorrect interface', Todos)
   return h('section', {className: 'todoapp'}, [
     header(Todos),

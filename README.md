@@ -1,6 +1,16 @@
 # todomvc-express
 > TodoMVC with server-side rendering
 
+Live demo at [todomvc-express.herokuapp.com/](https://todomvc-express.herokuapp.com/)
+
+Complete server-side rendering for TodoMVC using [ExpressJS](http://expressjs.com/) 
+server and [virtual-dom](https://github.com/Matt-Esch/virtual-dom). In fact, NO client side
+JavaScript is allowed using 
+[Content Security Policy](https://glebbahmutov.com/blog/disable-inline-javascript-for-security/)
+setting in the page "meta" tag (view page source).
+
+Any new todo, or click leads to the form submission and new page rendering.
+
 ### Small print
 
 Author: Gleb Bahmutov &copy; 2016
