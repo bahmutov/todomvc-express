@@ -32,7 +32,8 @@ function addTodo (what) {
 
   const newTodo = todoFactory(what)
   la(is.object(newTodo), 'could not create todo from', what, 'got', newTodo)
-  todos.push(newTodo)
+  // I like putting new todo at the top of the list
+  todos.unshift(newTodo)
 
   saveTodos(todos)
 }
@@ -54,8 +55,23 @@ function deleteTodo (id) {
   saveTodos(filtered)
 }
 
+function markTodo (id, done) {
+  la(is.unemptyString(id), 'expected id', id)
+  const todos = loadTodos()
+
+  todos.forEach(function (todo) {
+    if (todo.id === id) {
+      todo.done = done
+      console.log('Marked todo "%s" id %s as', todo.what, todo.id, done)
+    }
+  })
+
+  saveTodos(todos)
+}
+
 module.exports = {
   loadTodos: loadTodos,
   addTodo: addTodo,
-  deleteTodo: deleteTodo
+  deleteTodo: deleteTodo,
+  markTodo: markTodo
 }

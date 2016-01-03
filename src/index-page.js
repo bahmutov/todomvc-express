@@ -13,7 +13,10 @@ const header = [
   '<link rel="stylesheet" href="app.css">',
   '</style>',
   '</head>',
-  '<body>'
+  '<body>',
+  '<p>This is server-side rendering TodoMVC example.',
+  'Only adding new todos (type and click Enter), removing and marking done',
+  'are supported.</p>'
 ].join('\n')
 
 const footer = [

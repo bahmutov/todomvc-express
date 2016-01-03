@@ -63,12 +63,25 @@ function deleteTodo (req, res) {
   res.redirect('/')
 }
 
+function markTodo (req, res) {
+  console.log('marking todo', req.body.id, 'as done?', req.body.done)
+
+  // sync for now
+  if (is.unemptyString(req.body.id)) {
+    const db = require('./db')
+    db.markTodo(req.body.id, req.body.done === 'true')
+  }
+
+  res.redirect('/')
+}
+
 app.get('/', sendIndexPage)
 app.get('/app.css', sendAppCss)
 app.get('/about', sendAboutPage)
 
+// actions
 app.post('/', addTodo)
-
 app.delete('/', deleteTodo)
+app.patch('/mark', markTodo)
 
 module.exports = app

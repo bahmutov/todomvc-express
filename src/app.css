@@ -1,3 +1,19 @@
+.checkboxContainer {
+  display: inline-block;
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+.checkboxSubmit {
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: auto 0;
+}
+
 hr {
   margin: 20px 0;
   border: 0;
@@ -293,6 +309,7 @@ label[for='toggle-all'] {
   position: relative;
   font-size: 24px;
   border-bottom: 1px solid #ededed;
+  padding: 10px 5px;
 }
 
 .todo-list li:last-child {
@@ -340,11 +357,13 @@ label[for='toggle-all'] {
 .todo-list li label {
   white-space: pre-line;
   word-break: break-all;
-  padding: 15px 60px 15px 15px;
-  margin-left: 45px;
-  display: block;
-  line-height: 1.2;
-  transition: color 0.4s;
+  /*padding: 15px 60px 15px 15px;*/
+  margin-left: 15px;
+  height: 40px;
+  display: inline-block;
+  line-height: 40px;
+  /*transition: color 0.4s;*/
+  position: absolute;
 }
 
 .todo-list li.completed label {
