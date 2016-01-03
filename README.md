@@ -1,6 +1,11 @@
 # todomvc-express
 > TodoMVC with server-side rendering
 
+[![NPM][todomvc-express-icon] ][todomvc-express-url]
+
+[![Build status][todomvc-express-ci-image] ][todomvc-express-ci-url]
+[![semantic-release][semantic-image] ][semantic-url]
+
 Live demo at [todomvc-express.herokuapp.com/](https://todomvc-express.herokuapp.com/)
 
 Complete server-side rendering for TodoMVC using [ExpressJS](http://expressjs.com/) 
@@ -10,6 +15,17 @@ JavaScript is allowed using
 setting in the page "meta" tag (view page source).
 
 Any new todo, or click leads to the form submission and new page rendering.
+
+## Related
+
+I have written a couple of modules that help with TodoMVC applications.
+
+* [virtual-todos](https://github.com/bahmutov/virtual-todos) - generates Virtual Dom from todos
+* [fake-todos](https://github.com/bahmutov/fake-todos) to generate fake todo items
+* [todomvc-model](https://github.com/bahmutov/todomvc-model) is the model that keeps
+  todo items and responds to outside events
+* [instant-vdom-todo](https://github.com/bahmutov/instant-vdom-todo) - instant web app
+  using ServiceWorker
 
 ### Small print
 
@@ -51,3 +67,9 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
+[todomvc-express-icon]: https://nodei.co/npm/todomvc-express.png?downloads=true
+[todomvc-express-url]: https://npmjs.org/package/todomvc-express
+[todomvc-express-ci-image]: https://travis-ci.org/bahmutov/todomvc-express.png?branch=master
+[todomvc-express-ci-url]: https://travis-ci.org/bahmutov/todomvc-express
+[semantic-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
+[semantic-url]: https://github.com/semantic-release/semantic-release
