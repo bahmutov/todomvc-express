@@ -6,7 +6,9 @@
 [![Build status][todomvc-express-ci-image] ][todomvc-express-ci-url]
 [![semantic-release][semantic-image] ][semantic-url]
 
-Live demo at [todomvc-express.herokuapp.com/](https://todomvc-express.herokuapp.com/)
+Live demo at [todomvc-express.herokuapp.com/](https://todomvc-express.herokuapp.com/) - 
+might be asleep, wait 10 seconds. Does not permanently store todos; they disappear when
+the dyno goes to sleep.
 
 Complete server-side rendering for TodoMVC using [ExpressJS](http://expressjs.com/) 
 server and [virtual-dom](https://github.com/Matt-Esch/virtual-dom). In fact, NO client side
