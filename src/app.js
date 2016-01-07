@@ -1,35 +1,33 @@
 const express = require('express')
 const app = express()
+const morgan = require('morgan')
 const is = require('check-more-types')
 const methodOverride = require('method-override')
+const bodyParser = require('body-parser')
 
-var bodyParser = require('body-parser')
+app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-// override with POST having ?_method=DELETE
-app.use(methodOverride('_method'))
+function hasMethodField (req) {
+  return is.object(req.body) &&
+    is.unemptyString(req.body._method)
+}
 
-const aboutPage = [
-  '<!DOCTYPE html>',
-  '<html lang="en">',
-  '<head>',
-  '<meta charset="utf-8">',
-  '</head>',
-  '<body>',
-  '<h1>About express-service</h1>',
-  '</body>',
-  '</html>'
-].join('\n')
+function grabMethodFromBody (req, res) {
+  if (hasMethodField(req)) {
+    const method = req.body._method
+    delete req.body._method
+    return method
+  }
+}
+
+app.use(methodOverride(grabMethodFromBody))
 
 const renderIndexPage = require('./index-page')
 
 function sendIndexPage (req, res) {
   res.send(renderIndexPage())
-}
-
-function sendAboutPage (req, res) {
-  res.send(aboutPage)
 }
 
 function sendAppCss (req, res) {
@@ -39,7 +37,7 @@ function sendAppCss (req, res) {
   res.send(css)
 }
 
-function addTodo (req, res) {
+function addTodo (req, res, next) {
   console.log('adding new todo')
   console.log('post params', req.body)
 
@@ -48,10 +46,10 @@ function addTodo (req, res) {
     const db = require('./db')
     db.addTodo(req.body.what)
   }
-  res.redirect('/')
+  next()
 }
 
-function deleteTodo (req, res) {
+function deleteTodo (req, res, next) {
   console.log('deleting todo', req.body.id)
 
   // sync for now
@@ -59,11 +57,10 @@ function deleteTodo (req, res) {
     const db = require('./db')
     db.deleteTodo(req.body.id)
   }
-
-  res.redirect('/')
+  next()
 }
 
-function markTodo (req, res) {
+function markTodo (req, res, next) {
   console.log('marking todo', req.body.id, 'as done?', req.body.done)
 
   // sync for now
@@ -72,16 +69,15 @@ function markTodo (req, res) {
     db.markTodo(req.body.id, req.body.done === 'true')
   }
 
-  res.redirect('/')
+  next()
 }
 
 app.get('/', sendIndexPage)
 app.get('/app.css', sendAppCss)
-app.get('/about', sendAboutPage)
 
 // actions
-app.post('/', addTodo)
-app.delete('/', deleteTodo)
-app.patch('/mark', markTodo)
+app.post('/', addTodo, sendIndexPage)
+app.delete('/', deleteTodo, sendIndexPage)
+app.patch('/', markTodo, sendIndexPage)
 
 module.exports = app

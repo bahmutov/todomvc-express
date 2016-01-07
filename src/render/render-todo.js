@@ -6,7 +6,7 @@ function render (Todos, todo) {
       h('form', {
         className: 'checkboxContainer',
         method: 'POST',
-        action: '/mark?_method=PATCH',
+        action: '/',
         enctype: 'application/x-www-form-urlencoded'
       }, [
         h('input', {
@@ -24,12 +24,17 @@ function render (Todos, todo) {
           type: 'hidden',
           name: 'id',
           value: todo.id
+        }),
+        h('input', {
+          type: 'hidden',
+          name: '_method',
+          value: 'PATCH'
         })
       ]),
       h('label', todo.what),
       h('form', {
         method: 'POST',
-        action: '/?_method=DELETE',
+        action: '/',
         enctype: 'application/x-www-form-urlencoded'
       }, [
         h('input', {
@@ -40,6 +45,11 @@ function render (Todos, todo) {
         h('button', {
           className: 'destroy',
           type: 'submit'
+        }),
+        h('input', {
+          type: 'hidden',
+          name: '_method',
+          value: 'DELETE'
         })
       ])
     ])
