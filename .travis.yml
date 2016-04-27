@@ -9,11 +9,13 @@ node_js:
   - '4'
 before_install:
   - npm i -g npm@^2.0.0
+  - npm install -g cypress-cli
 before_script:
   - npm prune
 script:
   - npm run lint
   - npm test
+  - cypress ci
 after_success:
   - npm run semantic-release
 branches:
