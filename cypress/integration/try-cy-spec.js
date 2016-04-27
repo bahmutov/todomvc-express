@@ -27,11 +27,27 @@ describe('todomvc app', function () {
 
   it('can insert new todo', function () {
     cy.get('.new-todo')
-      .type('test cy{enter}')
+      .type('new todo{enter}')
+      .get('ul.todo-list')
+        .find('li').should('not.be.empty')
+  })
+
+  it('can view active todos', function () {
+    cy.get('.new-todo')
+      .type('active todo{enter}')
       .get('ul.todo-list')
         .find('li').should('not.be.empty')
         .find('.toggle').check({force: true})
       .get('ul.filters').contains('Active').click()
       .hash().should('eq', '#/active')
+  })
+
+  it.skip('can clear all completed todos', function () {
+    cy
+      .get('ul.todo-list')
+        .find('.toggle').check({force: true})
+      .get('button.clear-completed').click()
+      .get('ul.todo-list')
+        .find('li').should('be.empty')
   })
 })
