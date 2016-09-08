@@ -20,6 +20,10 @@ describe('todomvc app', function () {
     cy.visit(baseUrl)
   })
 
+  it.only('has the right title', function () {
+    cy.title().should('contain', 'TodoMVC')
+  })
+
   it('can load the app', function () {
     cy.get('h1').should('contain', 'todos')
   })
