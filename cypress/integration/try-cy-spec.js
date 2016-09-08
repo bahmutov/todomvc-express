@@ -1,8 +1,5 @@
 'use strict'
 
-// const la = require('lazy-ass')
-// const is = require('check-more-types')
-
 // using function declaration instead of arrow functions
 // so Safari browser understands
 
@@ -17,8 +14,10 @@ describe('a cy unit test', function () {
 })
 
 describe('todomvc app', function () {
+  const baseUrl = Cypress.env('HOST') || 'http://localhost:3000'
+
   beforeEach(function () {
-    cy.visit('http://localhost:3000')
+    cy.visit(baseUrl)
   })
 
   it('can load the app', function () {
