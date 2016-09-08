@@ -8,7 +8,8 @@
     "lint": "standard *.js src/**/*.js",
     "start": "node --harmony src/start.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "commit": "commit-wizard"
+    "commit": "commit-wizard",
+    "prod-test": "CYPRESS_HOST=$NOW_URL cypress ci"
   },
   "repository": {
     "type": "git",

@@ -18,7 +18,7 @@ script:
   - cypress ci
   - npm install -g now-pipeline@1.4.3
   - now-pipeline-prune
-  - now-pipeline --test "CYPRESS_HOST=$NOW_URL cypress ci" package.json src/*.js src/render/*.js
+  - now-pipeline --test "npm run prod-test" package.json src/*.js src/*.css src/render/*.js
 after_success:
   - npm run semantic-release
 branches:
