@@ -4,7 +4,8 @@ const is = require('check-more-types')
 const join = require('path').join
 const fs = require('fs')
 const exists = fs.existsSync
-const todosPath = join(process.cwd(), 'todos.json')
+const todosFolder = process.env.NOW ? '/tmp' : process.cwd()
+const todosPath = join(todosFolder, 'todos.json')
 const todoFactory = require('todomvc-model').utils.factory
 
 la(is.fn(todoFactory), 'missing todo factory')
