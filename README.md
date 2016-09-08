@@ -6,15 +6,15 @@
 [![Build status][todomvc-express-ci-image] ][todomvc-express-ci-url]
 [![semantic-release][semantic-image] ][semantic-url]
 
-Live demo at [todomvc-express.herokuapp.com/](https://todomvc-express.herokuapp.com/) - 
+Live demo at [todomvc-express.herokuapp.com/](https://todomvc-express.herokuapp.com/) -
 might be asleep, wait 10 seconds. Does not permanently store todos; they disappear when
 the dyno goes to sleep.
 
-Complete server-side rendering for TodoMVC using [ExpressJS](http://expressjs.com/) 
-server and [virtual-dom](https://github.com/Matt-Esch/virtual-dom). 
+Complete server-side rendering for TodoMVC using [ExpressJS](http://expressjs.com/)
+server and [virtual-dom](https://github.com/Matt-Esch/virtual-dom).
 
 In fact, NO client side
-JavaScript is allowed using 
+JavaScript is allowed using
 [Content Security Policy](https://glebbahmutov.com/blog/disable-inline-javascript-for-security/)
 setting in the page "meta" tag (view page source). You can disable JavaScript in your browser
 and the page will still work just fine.
@@ -82,9 +82,9 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
-[todomvc-express-icon]: https://nodei.co/npm/todomvc-express.png?downloads=true
+[todomvc-express-icon]: https://nodei.co/npm/todomvc-express.svg?downloads=true
 [todomvc-express-url]: https://npmjs.org/package/todomvc-express
-[todomvc-express-ci-image]: https://travis-ci.org/bahmutov/todomvc-express.png?branch=master
+[todomvc-express-ci-image]: https://travis-ci.org/bahmutov/todomvc-express.svg?branch=master
 [todomvc-express-ci-url]: https://travis-ci.org/bahmutov/todomvc-express
 [semantic-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [semantic-url]: https://github.com/semantic-release/semantic-release
