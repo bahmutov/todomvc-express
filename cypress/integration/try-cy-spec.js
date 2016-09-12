@@ -20,7 +20,7 @@ describe('todomvc app', function () {
     cy.visit(baseUrl)
   })
 
-  it.only('has the right title', function () {
+  it('has the right title', function () {
     cy.title().should('contain', 'TodoMVC')
   })
 
