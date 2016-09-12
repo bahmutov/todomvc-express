@@ -16,9 +16,9 @@ script:
   - npm test
   - npm start &
   - cypress ci
-  - npm install -g now-pipeline@1.4.3
+  - npm install -g now-pipeline@1.7.1
   - now-pipeline-prune
-  - now-pipeline --test "npm run prod-test" package.json src/*.js src/*.css src/render/*.js
+  - DEBUG=now-pipeline now-pipeline --test "npm run prod-test"
 after_success:
   - npm run semantic-release
 branches:
