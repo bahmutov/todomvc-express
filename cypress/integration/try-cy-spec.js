@@ -16,6 +16,13 @@ describe('a cy unit test', function () {
 describe('todomvc app', function () {
   const baseUrl = Cypress.env('HOST') || 'http://localhost:3000'
 
+  function addTodo () {
+    cy.get('.new-todo')
+      .type('new todo{enter}')
+      .get('ul.todo-list')
+        .find('li').should('not.be.empty')
+  }
+
   beforeEach(function () {
     cy.visit(baseUrl)
   })
@@ -29,10 +36,12 @@ describe('todomvc app', function () {
   })
 
   it('can insert new todo', function () {
-    cy.get('.new-todo')
-      .type('new todo{enter}')
-      .get('ul.todo-list')
-        .find('li').should('not.be.empty')
+    addTodo()
+  })
+
+  it('can reload the page after adding new todo', () => {
+    addTodo()
+    cy.reload()
   })
 
   it('can view active todos', function () {

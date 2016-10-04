@@ -3,3 +3,4 @@ src/.DS_Store
 todos.json
 cypress/screenshots/
 npm-debug.log
+.DS_Store

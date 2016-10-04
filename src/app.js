@@ -30,6 +30,10 @@ function sendIndexPage (req, res) {
   res.send(renderIndexPage())
 }
 
+function toIndex (req, res) {
+  res.redirect('/')
+}
+
 function sendAppCss (req, res) {
   const cssPath = require('path').join(__dirname, 'app.css')
   const css = require('fs').readFileSync(cssPath, 'utf-8')
@@ -76,8 +80,8 @@ app.get('/', sendIndexPage)
 app.get('/app.css', sendAppCss)
 
 // actions
-app.post('/', addTodo, sendIndexPage)
-app.delete('/', deleteTodo, sendIndexPage)
-app.patch('/', markTodo, sendIndexPage)
+app.post('/', addTodo, toIndex)
+app.delete('/', deleteTodo, toIndex)
+app.patch('/', markTodo, toIndex)
 
 module.exports = app
