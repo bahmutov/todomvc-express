@@ -16,9 +16,9 @@ describe('a cy unit test', function () {
 describe('todomvc app', function () {
   const baseUrl = Cypress.env('HOST') || 'http://localhost:3000'
 
-  function addTodo () {
+  function addTodo (label = 'new todo') {
     cy.get('.new-todo')
-      .type('new todo{enter}')
+      .type(`${label}{enter}`)
       .get('ul.todo-list')
         .find('li').should('not.be.empty')
   }
@@ -54,12 +54,21 @@ describe('todomvc app', function () {
       .hash().should('eq', '#/active')
   })
 
-  it.skip('can clear all completed todos', function () {
+  it('can clear all completed todos', function () {
+    const random = Math.random().toString(16).substr(2)
+    const label = `an example ${random}`
+    addTodo(label)
     cy
       .get('ul.todo-list')
-        .find('.toggle').check({force: true})
+      .contains('li', label)
+      .find('.checkboxSubmit').click()
+
+    cy
       .get('button.clear-completed').click()
+
+    cy
       .get('ul.todo-list')
-        .find('li').should('be.empty')
+      .contains('li', label)
+      .should('not.exist')
   })
 })

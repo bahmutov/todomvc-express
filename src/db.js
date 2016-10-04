@@ -77,9 +77,18 @@ function markTodo (id, done) {
   saveTodos(todos)
 }
 
+function clearCompleted () {
+  const todos = loadTodos()
+  const remaining = todos.filter(todo => !todo.done)
+  console.log('%d todos total, %d todos remaining',
+    todos.length, remaining.length)
+  saveTodos(remaining)
+}
+
 module.exports = {
-  loadTodos: loadTodos,
-  addTodo: addTodo,
-  deleteTodo: deleteTodo,
-  markTodo: markTodo
+  loadTodos,
+  addTodo,
+  deleteTodo,
+  markTodo,
+  clearCompleted
 }

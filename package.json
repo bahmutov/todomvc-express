@@ -5,11 +5,12 @@
   "main": "src/app.js",
   "scripts": {
     "test": "npm run lint",
-    "lint": "standard *.js src/**/*.js",
+    "lint": "standard --verbose --fix *.js src/**/*.js",
     "start": "node src/start.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "commit": "commit-wizard",
-    "prod-test": "CYPRESS_HOST=$NOW_URL cypress ci"
+    "prod-test": "CYPRESS_HOST=$NOW_URL cypress ci",
+    "watch": "nodemon"
   },
   "repository": {
     "type": "git",

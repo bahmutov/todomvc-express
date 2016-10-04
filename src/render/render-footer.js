@@ -45,16 +45,22 @@ function render (Todos) {
         }, 'Completed')
       ])
     ]),
-    h('button', {
-      className: 'clear-completed',
-      style: {
-        display: hasCompleted(Todos.items) ? 'block' : 'none'
-      },
-      onclick: function () {
-        // todos && todos.clearCompleted();
-        // renderApp();
-      }
-    }, 'Clear completed')
+    h('form', {
+      method: 'POST',
+      action: '/clear-completed',
+      enctype: 'application/x-www-form-urlencoded'
+    }, [
+      h('button', {
+        className: 'clear-completed',
+        style: {
+          display: hasCompleted(Todos.items) ? 'block' : 'none'
+        },
+        onclick: function () {
+          // todos && todos.clearCompleted();
+          // renderApp();
+        }
+      }, 'Clear completed')
+    ])
   ])
 }
 

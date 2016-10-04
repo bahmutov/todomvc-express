@@ -76,6 +76,13 @@ function markTodo (req, res, next) {
   next()
 }
 
+function clearCompleted (req, res, next) {
+  console.log('clearing completed todos')
+  const db = require('./db')
+  db.clearCompleted()
+  next()
+}
+
 app.get('/', sendIndexPage)
 app.get('/app.css', sendAppCss)
 
@@ -83,5 +90,6 @@ app.get('/app.css', sendAppCss)
 app.post('/', addTodo, toIndex)
 app.delete('/', deleteTodo, toIndex)
 app.patch('/', markTodo, toIndex)
+app.post('/clear-completed', clearCompleted, toIndex)
 
 module.exports = app
