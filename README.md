@@ -42,6 +42,24 @@ I have written a couple of modules that help with TodoMVC applications.
 * [instant-vdom-todo](https://github.com/bahmutov/instant-vdom-todo) - instant web app
   using ServiceWorker
 
+## Emit
+
+The returned Express app is also an event emitter. Every data update it
+emits the updated todo list.
+
+```js
+const app = require('todomvc-express')
+app.on('todos', function (todos) {
+  console.log('server has new %d todos', todos.length)
+  // each todo object has {what, done, id} like this
+  /*
+    { what: 'new todo',
+       done: false,
+       id: '43e63255-5582-4f6f-85c2-dc2e85e44ffb' }
+  */
+})
+```
+
 ### Small print
 
 Author: Gleb Bahmutov &copy; 2016

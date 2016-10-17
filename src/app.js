@@ -34,6 +34,14 @@ function toIndex (req, res) {
   res.redirect('/')
 }
 
+function broadcast (req, res, next) {
+  const db = require('./db')
+  const todos = db.loadTodos()
+  console.log('emitting %d todos', todos.length)
+  app.emit('todos', todos)
+  next()
+}
+
 function sendAppCss (req, res) {
   const cssPath = require('path').join(__dirname, 'app.css')
   const css = require('fs').readFileSync(cssPath, 'utf-8')
@@ -83,13 +91,13 @@ function clearCompleted (req, res, next) {
   next()
 }
 
-app.get('/', sendIndexPage)
+app.get('/', broadcast, sendIndexPage)
 app.get('/app.css', sendAppCss)
 
 // actions
-app.post('/', addTodo, toIndex)
-app.delete('/', deleteTodo, toIndex)
-app.patch('/', markTodo, toIndex)
-app.post('/clear-completed', clearCompleted, toIndex)
+app.post('/', addTodo, broadcast, toIndex)
+app.delete('/', deleteTodo, broadcast, toIndex)
+app.patch('/', markTodo, broadcast, toIndex)
+app.post('/clear-completed', clearCompleted, broadcast, toIndex)
 
 module.exports = app
