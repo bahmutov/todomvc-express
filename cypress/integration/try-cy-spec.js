@@ -3,6 +3,10 @@
 // using function declaration instead of arrow functions
 // so Safari browser understands
 
+function random() {
+  return Math.random().toString(16).substr(2)
+}
+
 describe('a cy unit test', function () {
   it('is ok', function () {
     expect(true).to.be.true
@@ -63,8 +67,8 @@ describe('todomvc app', function () {
   })
 
   it('can clear all completed todos', function () {
-    const random = Math.random().toString(16).substr(2)
-    const label = `an example ${random}`
+    const id = random()
+    const label = `an example ${id}`
     addTodo(label)
     cy
       .get('ul.todo-list')
@@ -78,5 +82,18 @@ describe('todomvc app', function () {
       .get('ul.todo-list')
       .contains('li', label)
       .should('not.exist')
+  })
+
+  it('can show individual TODO item', function () {
+    const id = random()
+    const label = `one todo ${id}`
+    addTodo(label)
+    cy.get('ul.todo-list')
+      .contains('li', label)
+      .should('be.visible')
+      .click()
+    cy.url().should('contain', `/todo/`)
+    cy.get('ul.todo-list li')
+      .should('have.length', 1)
   })
 })
