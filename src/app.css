@@ -366,6 +366,11 @@ label[for='toggle-all'] {
   position: absolute;
 }
 
+.todo-list li a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .todo-list li.completed label {
   color: #d9d9d9;
   text-decoration: line-through;

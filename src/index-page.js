@@ -1,3 +1,7 @@
+'use strict'
+
+const la = require('lazy-ass')
+const is = require('check-more-types')
 const render = require('./render/render')
 const Todos = require('todomvc-model')
 const toHTML = require('vdom-to-html')
@@ -10,7 +14,7 @@ const header = [
   '<meta charset="utf-8">',
   '<meta http-equiv="Content-Security-Policy" content="script-src \'none\';">',
   '<title>TodoMVC</title>',
-  '<link rel="stylesheet" href="app.css">',
+  '<link rel="stylesheet" href="/app.css">',
   '</style>',
   '</head>',
   '<body>',
@@ -38,4 +42,10 @@ function renderIndexPage (filter, route) {
   return header + '\n' + todosMarkup + '\n' + footer
 }
 
-module.exports = renderIndexPage
+function renderTodoPage (id) {
+  la(is.unemptyString(id), 'missing todo id', id)
+  const filter = (todo) => todo.id === id
+  return renderIndexPage(filter)
+}
+
+module.exports = {renderIndexPage, renderTodoPage}

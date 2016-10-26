@@ -24,10 +24,14 @@ function grabMethodFromBody (req, res) {
 
 app.use(methodOverride(grabMethodFromBody))
 
-const renderIndexPage = require('./index-page')
+const {renderIndexPage, renderTodoPage} = require('./index-page')
 
 function sendIndexPage (req, res) {
   res.send(renderIndexPage())
+}
+
+function sendTodoPage (req, res) {
+  res.send(renderTodoPage(req.params.id))
 }
 
 function activeTodosPage (req, res) {
@@ -102,6 +106,7 @@ function clearCompleted (req, res, next) {
 }
 
 app.get('/', broadcast, sendIndexPage)
+app.get('/todo/:id', sendTodoPage)
 app.get('/app.css', sendAppCss)
 app.get('/active', activeTodosPage)
 app.get('/completed', completedTodosPage)

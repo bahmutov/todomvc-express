@@ -31,7 +31,11 @@ function render (Todos, todo) {
           value: 'PATCH'
         })
       ]),
-      h('label', todo.what),
+      h('label', [
+        h('a', {
+          href: `/todo/${todo.id}`
+        }, todo.what)
+      ]),
       h('form', {
         method: 'POST',
         action: '/',
