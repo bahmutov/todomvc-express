@@ -29,19 +29,19 @@ function render (Todos) {
       h('li', [
         h('a', {
           className: !route ? 'selected' : '',
-          href: '#/'
+          href: '/'
         }, 'All')
       ]),
       h('li', [
         h('a', {
           className: route === 'active' ? 'selected' : '',
-          href: '#/active'
+          href: '/active'
         }, 'Active')
       ]),
       h('li', [
         h('a', {
           className: route === 'completed' ? 'selected' : '',
-          href: '#/completed'
+          href: '/completed'
         }, 'Completed')
       ])
     ]),

@@ -30,6 +30,16 @@ function sendIndexPage (req, res) {
   res.send(renderIndexPage())
 }
 
+function activeTodosPage (req, res) {
+  const filter = (todo) => !todo.done
+  res.send(renderIndexPage(filter))
+}
+
+function completedTodosPage (req, res) {
+  const filter = (todo) => todo.done
+  res.send(renderIndexPage(filter))
+}
+
 function toIndex (req, res) {
   res.redirect('/')
 }
@@ -93,6 +103,8 @@ function clearCompleted (req, res, next) {
 
 app.get('/', broadcast, sendIndexPage)
 app.get('/app.css', sendAppCss)
+app.get('/active', activeTodosPage)
+app.get('/completed', completedTodosPage)
 
 // actions
 app.post('/', addTodo, broadcast, toIndex)

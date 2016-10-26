@@ -28,9 +28,11 @@ const footer = [
 ].join('\n')
 
 const db = require('./db')
+function T() { return true }
 
-function renderIndexPage () {
-  Todos.items = db.loadTodos()
+function renderIndexPage (filter) {
+  filter = filter ? filter : T
+  Todos.items = db.loadTodos().filter(filter)
   const rendered = render(Todos)
   const todosMarkup = beautify(toHTML(rendered), { indent_size: 2 })
   return header + '\n' + todosMarkup + '\n' + footer
