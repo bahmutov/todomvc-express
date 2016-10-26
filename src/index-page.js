@@ -30,10 +30,10 @@ const footer = [
 const db = require('./db')
 function T() { return true }
 
-function renderIndexPage (filter) {
+function renderIndexPage (filter, route) {
   filter = filter ? filter : T
   Todos.items = db.loadTodos().filter(filter)
-  const rendered = render(Todos)
+  const rendered = render(Todos, route)
   const todosMarkup = beautify(toHTML(rendered), { indent_size: 2 })
   return header + '\n' + todosMarkup + '\n' + footer
 }

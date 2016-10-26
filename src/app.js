@@ -32,12 +32,12 @@ function sendIndexPage (req, res) {
 
 function activeTodosPage (req, res) {
   const filter = (todo) => !todo.done
-  res.send(renderIndexPage(filter))
+  res.send(renderIndexPage(filter, req.url))
 }
 
 function completedTodosPage (req, res) {
   const filter = (todo) => todo.done
-  res.send(renderIndexPage(filter))
+  res.send(renderIndexPage(filter, req.url))
 }
 
 function toIndex (req, res) {

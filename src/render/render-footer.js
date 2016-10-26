@@ -16,9 +16,10 @@ function hasCompleted (todos) {
   })
 }
 
-function render (Todos) {
+// url could be nothing or '/active', '/completed'
+function render (Todos, url) {
   const remaining = countRemaining(Todos.items)
-  const route = hashFragment()
+  const route = hashFragment() || url
 
   return h('footer', {className: 'footer'}, [
     h('span', {className: 'todo-count'}, [
@@ -34,13 +35,13 @@ function render (Todos) {
       ]),
       h('li', [
         h('a', {
-          className: route === 'active' ? 'selected' : '',
+          className: route === '/active' ? 'selected' : '',
           href: '/active'
         }, 'Active')
       ]),
       h('li', [
         h('a', {
-          className: route === 'completed' ? 'selected' : '',
+          className: route === '/completed' ? 'selected' : '',
           href: '/completed'
         }, 'Completed')
       ])

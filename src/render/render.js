@@ -13,13 +13,14 @@ const is = require('check-more-types')
 //   remove: is.fn
 // })
 
-function render (Todos) {
+function render (Todos, route) {
   la(is.object(Todos), 'expected todos object', Todos)
   // la(isTodos(Todos), 'Todos has incorrect interface', Todos)
+
   return h('section', {className: 'todoapp'}, [
     header(Todos),
     renderTodos(Todos),
-    footer(Todos)
+    footer(Todos, route)
   ])
 }
 

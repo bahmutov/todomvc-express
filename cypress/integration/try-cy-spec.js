@@ -45,13 +45,21 @@ describe('todomvc app', function () {
   })
 
   it('can view active todos', function () {
+    cy.get('footer')
+      .contains('All')
+      .should('have.class', 'selected')
+
     cy.get('.new-todo')
       .type('active todo{enter}')
       .get('ul.todo-list')
         .find('li').should('not.be.empty')
         .find('.toggle').check({force: true})
       .get('ul.filters').contains('Active').click()
-      .hash().should('eq', '#/active')
+      .url().should('contain', '/active')
+
+    cy.get('footer')
+      .contains('Active')
+      .should('have.class', 'selected')
   })
 
   it('can clear all completed todos', function () {
