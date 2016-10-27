@@ -21,6 +21,7 @@ const header = [
   '<p>This is server-side rendering TodoMVC example.',
   'Only adding new todos (type and click Enter), removing and marking done',
   'are supported.</p>',
+  '<p>custom todo protocol link <a href="todo://active">active</a>, <a href="todo://completed">completed</a></p>',
   '<p><strong>This page works perfectly with browser JavaScript disabled</strong></p>.'
 ].join('\n')
 
