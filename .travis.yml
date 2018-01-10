@@ -11,9 +11,8 @@ before_script:
   - npm prune
 script:
   - npm test
-  - npm install -g now-pipeline@1.7.1
-  - now-pipeline-prune
-  - DEBUG=now-pipeline now-pipeline --test "npm run prod-test"
+  - npm run prune-deploys
+  - DEBUG=now-pipeline npm run deploy
 after_success:
   - npm run semantic-release
 branches:

@@ -13,7 +13,9 @@
     "prod-test": "CYPRESS_HOST=$NOW_URL cypress run",
     "watch": "nodemon",
     "cy:open": "cypress open",
-    "cy:run": "cypress run"
+    "cy:run": "cypress run",
+    "deploy": "now-pipeline --test 'npm run prod-test'",
+    "prune-deploys": "now-pipeline-prune"
   },
   "repository": {
     "type": "git",
@@ -39,12 +41,12 @@
   },
   "homepage": "https://github.com/bahmutov/todomvc-express#readme",
   "dependencies": {
-    "body-parser": "1.15.2",
-    "check-more-types": "2.23.0",
+    "body-parser": "1.18.2",
+    "check-more-types": "2.24.0",
     "express": "5.0.0-alpha.2",
     "fake-todos": "1.8.0",
-    "js-beautify": "1.6.4",
-    "lazy-ass": "1.5.0",
+    "js-beautify": "1.7.5",
+    "lazy-ass": "1.6.0",
     "method-override": "2.3.6",
     "morgan": "1.7.0",
     "todomvc-model": "1.2.0",
@@ -53,6 +55,7 @@
   },
   "devDependencies": {
     "cypress": "1.4.1",
+    "now-pipeline": "1.10.0",
     "npm-run-all": "4.1.2",
     "pre-git": "3.10.0",
     "semantic-release": "6.3.1",
@@ -70,5 +73,8 @@
       "post-commit": [],
       "post-merge": []
     }
+  },
+  "env": {
+    "NODE_ENV": "production"
   }
 }
