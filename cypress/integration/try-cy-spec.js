@@ -1,45 +1,47 @@
 'use strict'
 
-// using function declaration instead of arrow functions
-// so Safari browser understands
+/* eslint-env mocha */
 
-function random() {
-  return Math.random().toString(16).substr(2)
-}
+const random = () =>
+  Math.random()
+    .toString(16)
+    .substr(2)
 
-describe('a cy unit test', function () {
-  it('is ok', function () {
+describe('TodoMVC', function() {
+  it('is ok', function() {
     expect(true).to.be.true
   })
 
-  it('understands arrow functions', function () {
+  it('understands arrow functions', function() {
     expect(false).to.be.false
   })
 })
 
-describe('todomvc app', function () {
+describe('todomvc app', function() {
   const baseUrl = Cypress.env('HOST') || 'http://localhost:3000'
 
-  function addTodo (label = 'new todo') {
-    cy.get('.new-todo')
+  function addTodo(label = 'new todo') {
+    cy
+      .get('.new-todo')
       .type(`${label}{enter}`)
       .get('ul.todo-list')
-        .find('li').should('not.be.empty')
+      .find('li')
+      .should('not.be.empty')
   }
 
-  beforeEach(function () {
+  beforeEach(function() {
     cy.visit(baseUrl)
   })
 
-  it('has the right title', function () {
+  it('has the right title', function() {
     cy.title().should('contain', 'TodoMVC')
   })
 
-  it('can load the app', function () {
+  it('can load the app', function() {
     cy.get('h1').should('contain', 'todos')
   })
 
-  it('can insert new todo', function () {
+  it('can insert new todo', function() {
     addTodo()
   })
 
@@ -48,35 +50,43 @@ describe('todomvc app', function () {
     cy.reload()
   })
 
-  it('can view active todos', function () {
-    cy.get('footer')
+  it('can view active todos', function() {
+    cy
+      .get('footer')
       .contains('All')
       .should('have.class', 'selected')
 
-    cy.get('.new-todo')
+    cy
+      .get('.new-todo')
       .type('active todo{enter}')
       .get('ul.todo-list')
-        .find('li').should('not.be.empty')
-        .find('.toggle').check({force: true})
-      .get('ul.filters').contains('Active').click()
-      .url().should('contain', '/active')
+      .find('li')
+      .should('not.be.empty')
+      .find('.toggle')
+      .check({ force: true })
+      .get('ul.filters')
+      .contains('Active')
+      .click()
+      .url()
+      .should('contain', '/active')
 
-    cy.get('footer')
+    cy
+      .get('footer')
       .contains('Active')
       .should('have.class', 'selected')
   })
 
-  it('can clear all completed todos', function () {
+  it('can clear all completed todos', function() {
     const id = random()
     const label = `an example ${id}`
     addTodo(label)
     cy
       .get('ul.todo-list')
       .contains('li', label)
-      .find('.checkboxSubmit').click()
+      .find('.checkboxSubmit')
+      .click()
 
-    cy
-      .get('button.clear-completed').click()
+    cy.get('button.clear-completed').click()
 
     cy
       .get('ul.todo-list')
@@ -84,16 +94,16 @@ describe('todomvc app', function () {
       .should('not.exist')
   })
 
-  it('can show individual TODO item', function () {
+  it('can show individual TODO item', function() {
     const id = random()
     const label = `one todo ${id}`
     addTodo(label)
-    cy.get('ul.todo-list')
+    cy
+      .get('ul.todo-list')
       .contains('li', label)
       .should('be.visible')
       .click()
     cy.url().should('contain', `/todo/`)
-    cy.get('ul.todo-list li')
-      .should('have.length', 1)
+    cy.get('ul.todo-list li').should('have.length', 1)
   })
 })

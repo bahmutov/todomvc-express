@@ -4,3 +4,4 @@ todos.json
 cypress/screenshots/
 npm-debug.log
 .DS_Store
+cypress/videos/

@@ -4,13 +4,16 @@
   "version": "0.0.0-semantic-release",
   "main": "src/app.js",
   "scripts": {
-    "test": "npm run lint",
+    "pretest": "npm run lint",
+    "test": "run-p --race start cy:run",
     "lint": "standard --verbose --fix *.js src/**/*.js",
     "start": "node src/start.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "commit": "commit-wizard",
-    "prod-test": "CYPRESS_HOST=$NOW_URL cypress ci",
-    "watch": "nodemon"
+    "prod-test": "CYPRESS_HOST=$NOW_URL cypress run",
+    "watch": "nodemon",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "repository": {
     "type": "git",
@@ -49,6 +52,8 @@
     "virtual-dom": "2.1.1"
   },
   "devDependencies": {
+    "cypress": "1.4.1",
+    "npm-run-all": "4.1.2",
     "pre-git": "3.10.0",
     "semantic-release": "6.3.1",
     "standard": "8.5.0"
@@ -59,7 +64,6 @@
         "simple"
       ],
       "pre-commit": [
-        "npm run lint",
         "npm test"
       ],
       "pre-push": [],
