@@ -104,6 +104,12 @@ function clearCompleted (req, res, next) {
   db.clearCompleted().then(() => next())
 }
 
+function reset (req, res, next) {
+  console.log('reset todos')
+  const db = require('./db')
+  db.reset().then(() => next())
+}
+
 app.get('/', broadcast, sendIndexPage)
 app.get('/todo/:id', sendTodoPage)
 app.get('/app.css', sendAppCss)
@@ -111,6 +117,7 @@ app.get('/active', activeTodosPage)
 app.get('/completed', completedTodosPage)
 
 // actions
+app.post('/reset', reset, toIndex)
 app.post('/', addTodo, broadcast, toIndex)
 app.delete('/', deleteTodo, broadcast, toIndex)
 app.patch('/', markTodo, broadcast, toIndex)
