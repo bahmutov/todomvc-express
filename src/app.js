@@ -56,6 +56,13 @@ function broadcast (req, res, next) {
   })
 }
 
+function sendTodos (req, res) {
+  const db = require('./db')
+  db.loadTodos().then(todos => {
+    res.json(todos)
+  })
+}
+
 function sendAppCss (req, res) {
   const cssPath = require('path').join(__dirname, 'app.css')
   const css = require('fs').readFileSync(cssPath, 'utf-8')
@@ -115,6 +122,7 @@ app.get('/todo/:id', sendTodoPage)
 app.get('/app.css', sendAppCss)
 app.get('/active', activeTodosPage)
 app.get('/completed', completedTodosPage)
+app.get('/todos', sendTodos)
 
 // actions
 app.post('/reset', reset, toIndex)

@@ -32,6 +32,14 @@ describe('todomvc app', function () {
     cy.visit(baseUrl)
   })
 
+  it.only('can request data', () => {
+    addTodo()
+    addTodo()
+    addTodo()
+    const url = `${baseUrl}/todos`
+    cy.request(url).its('body').should('have.length', 3)
+  })
+
   it('has the right title', function () {
     cy.title().should('contain', 'TodoMVC')
   })
