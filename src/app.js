@@ -48,7 +48,7 @@ function toIndex (req, res) {
 }
 
 function broadcast (req, res, next) {
-  const db = require('./db')
+  const db = require('./cache')
   db.loadTodos().then(todos => {
     console.log('emitting %d todos', todos.length)
     app.emit('todos', todos)
@@ -57,7 +57,7 @@ function broadcast (req, res, next) {
 }
 
 function sendTodos (req, res) {
-  const db = require('./db')
+  const db = require('./cache')
   db.loadTodos().then(todos => {
     res.json(todos)
   })
@@ -74,9 +74,8 @@ function addTodo (req, res, next) {
   console.log('adding new todo')
   console.log('post params', req.body)
 
-  // sync for now
   if (is.unemptyString(req.body.what)) {
-    const db = require('./db')
+    const db = require('./cache')
     return db.addTodo(req.body.what).then(() => next())
   }
   next()
@@ -87,7 +86,7 @@ function deleteTodo (req, res, next) {
 
   // sync for now
   if (is.unemptyString(req.body.id)) {
-    const db = require('./db')
+    const db = require('./cache')
     return db.deleteTodo(req.body.id).then(() => next())
   }
   next()
@@ -98,7 +97,7 @@ function markTodo (req, res, next) {
 
   // sync for now
   if (is.unemptyString(req.body.id)) {
-    const db = require('./db')
+    const db = require('./cache')
     return db.markTodo(req.body.id, req.body.done === 'true').then(() => next())
   }
 
@@ -107,14 +106,14 @@ function markTodo (req, res, next) {
 
 function clearCompleted (req, res, next) {
   console.log('clearing completed todos')
-  const db = require('./db')
+  const db = require('./cache')
   db.clearCompleted().then(() => next())
 }
 
-function reset (req, res, next) {
+function reset (req, res) {
   console.log('reset todos')
-  const db = require('./db')
-  db.reset().then(() => next())
+  const db = require('./cache')
+  db.reset().then(() => res.end())
 }
 
 app.get('/', broadcast, sendIndexPage)
@@ -125,7 +124,7 @@ app.get('/completed', completedTodosPage)
 app.get('/todos', sendTodos)
 
 // actions
-app.post('/reset', reset, toIndex)
+app.post('/reset', reset)
 app.post('/', addTodo, broadcast, toIndex)
 app.delete('/', deleteTodo, broadcast, toIndex)
 app.patch('/', markTodo, broadcast, toIndex)

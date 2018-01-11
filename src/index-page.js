@@ -32,7 +32,7 @@ const footer = [
   '</html>'
 ].join('\n')
 
-const db = require('./db')
+const db = require('./cache')
 function T () {
   return true
 }

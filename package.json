@@ -42,6 +42,7 @@
   "homepage": "https://github.com/bahmutov/todomvc-express#readme",
   "dependencies": {
     "body-parser": "1.18.2",
+    "cache-manager": "2.6.0",
     "check-more-types": "2.24.0",
     "express": "5.0.0-alpha.2",
     "fake-todos": "1.8.0",

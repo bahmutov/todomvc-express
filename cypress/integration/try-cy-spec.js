@@ -32,11 +32,23 @@ describe('todomvc app', function () {
     cy.visit(baseUrl)
   })
 
-  it('can request data', () => {
-    addTodo()
-    addTodo()
-    addTodo()
+  it('has cached responses', () => {
     const url = `${baseUrl}/todos`
+    cy.request('POST', `${baseUrl}/reset`)
+    cy.request(url).its('duration').as('first').then(cy.log)
+    cy.request(url).its('duration').as('second').then(cy.log)
+    // first request should be >= 1 second
+    cy.get('@first').should('be.above', 1000)
+    // but the second request should be quick
+    cy.get('@second').should('be.below', 50)
+  })
+
+  it('can request items', () => {
+    const url = `${baseUrl}/todos`
+    addTodo()
+    addTodo()
+    addTodo()
+    cy.request(url)
     cy.request(url).its('body').should('have.length', 3)
   })
 

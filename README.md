@@ -60,6 +60,10 @@ app.on('todos', function (todos) {
 })
 ```
 
+## Caching
+
+I have added a level of in-memory caching, see [src/cache.js](src/cache.js). Instead of calling `db` methods directly, like `db.loadTodos()` the app code goes through the cache methods, that have same API as db. To better show caching, I slowed down the `db.loadTodos` to take 1 second.
+
 ### Small print
 
 Author: Gleb Bahmutov &copy; 2016

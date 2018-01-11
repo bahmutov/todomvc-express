@@ -21,17 +21,20 @@ function reset () {
   return saveTodos([])
 }
 
-const loadTodos = () =>
-  fs.pathExists(todosPath).then(found => {
+const loadTodos = () => {
+  console.log('db: loading todos')
+  return fs.pathExists(todosPath).then(found => {
     if (!found) {
       console.log('Cannot find todos file, returning new list')
       return saveTodos(initialTodos())
     }
     return pMinDelay(fs.readJson(todosPath), 1000)
   })
+}
 
 function saveTodos (items) {
   la(is.array(items), 'expected list of items, not', items)
+  console.log('db: saved %d todo(s)', items.length)
   return fs.writeJson(todosPath, items)
 }
 
