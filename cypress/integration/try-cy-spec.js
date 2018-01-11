@@ -1,26 +1,24 @@
 'use strict'
 
 /* eslint-env mocha */
+/* global cy, Cypress, expect */
 
-const random = () =>
-  Math.random()
-    .toString(16)
-    .substr(2)
+const random = () => Math.random().toString(16).substr(2)
 
-describe('TodoMVC', function() {
-  it('is ok', function() {
+describe('TodoMVC', function () {
+  it('is ok', function () {
     expect(true).to.be.true
   })
 
-  it('understands arrow functions', function() {
+  it('understands arrow functions', function () {
     expect(false).to.be.false
   })
 })
 
-describe('todomvc app', function() {
+describe('todomvc app', function () {
   const baseUrl = Cypress.env('HOST') || 'http://localhost:3000'
 
-  function addTodo(label = 'new todo') {
+  function addTodo (label = 'new todo') {
     cy
       .get('.new-todo')
       .type(`${label}{enter}`)
@@ -29,19 +27,20 @@ describe('todomvc app', function() {
       .should('not.be.empty')
   }
 
-  beforeEach(function() {
+  beforeEach(function () {
+    cy.request('POST', `${baseUrl}/reset`)
     cy.visit(baseUrl)
   })
 
-  it('has the right title', function() {
+  it('has the right title', function () {
     cy.title().should('contain', 'TodoMVC')
   })
 
-  it('can load the app', function() {
+  it('can load the app', function () {
     cy.get('h1').should('contain', 'todos')
   })
 
-  it('can insert new todo', function() {
+  it('can insert new todo', function () {
     addTodo()
   })
 
@@ -50,11 +49,8 @@ describe('todomvc app', function() {
     cy.reload()
   })
 
-  it('can view active todos', function() {
-    cy
-      .get('footer')
-      .contains('All')
-      .should('have.class', 'selected')
+  it('can view active todos', function () {
+    cy.get('footer').contains('All').should('have.class', 'selected')
 
     cy
       .get('.new-todo')
@@ -70,39 +66,25 @@ describe('todomvc app', function() {
       .url()
       .should('contain', '/active')
 
-    cy
-      .get('footer')
-      .contains('Active')
-      .should('have.class', 'selected')
+    cy.get('footer').contains('Active').should('have.class', 'selected')
   })
 
-  it('can clear all completed todos', function() {
+  it('can clear all completed todos', function () {
     const id = random()
     const label = `an example ${id}`
     addTodo(label)
-    cy
-      .get('ul.todo-list')
-      .contains('li', label)
-      .find('.checkboxSubmit')
-      .click()
+    cy.get('ul.todo-list').contains('li', label).find('.checkboxSubmit').click()
 
     cy.get('button.clear-completed').click()
 
-    cy
-      .get('ul.todo-list')
-      .contains('li', label)
-      .should('not.exist')
+    cy.get('ul.todo-list').contains('li', label).should('not.exist')
   })
 
-  it('can show individual TODO item', function() {
+  it('can show individual TODO item', function () {
     const id = random()
     const label = `one todo ${id}`
     addTodo(label)
-    cy
-      .get('ul.todo-list')
-      .contains('li', label)
-      .should('be.visible')
-      .click()
+    cy.get('ul.todo-list').contains('li', label).should('be.visible').click()
     cy.url().should('contain', `/todo/`)
     cy.get('ul.todo-list li').should('have.length', 1)
   })
