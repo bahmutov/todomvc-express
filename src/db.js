@@ -16,6 +16,11 @@ function initialTodos () {
   return faker(2)
 }
 
+function reset () {
+  console.log('resetting todos')
+  return saveTodos([])
+}
+
 function loadTodos () {
   if (!exists(todosPath)) {
     console.log('Cannot find todos file, returning new list')
@@ -80,8 +85,11 @@ function markTodo (id, done) {
 function clearCompleted () {
   const todos = loadTodos()
   const remaining = todos.filter(todo => !todo.done)
-  console.log('%d todos total, %d todos remaining',
-    todos.length, remaining.length)
+  console.log(
+    '%d todos total, %d todos remaining',
+    todos.length,
+    remaining.length
+  )
   saveTodos(remaining)
 }
 
@@ -90,5 +98,6 @@ module.exports = {
   addTodo,
   deleteTodo,
   markTodo,
-  clearCompleted
+  clearCompleted,
+  reset
 }

@@ -33,10 +33,12 @@ const footer = [
 ].join('\n')
 
 const db = require('./db')
-function T() { return true }
+function T () {
+  return true
+}
 
 function renderIndexPage (filter, route) {
-  filter = filter ? filter : T
+  filter = filter || T
   Todos.items = db.loadTodos().filter(filter)
   const rendered = render(Todos, route)
   const todosMarkup = beautify(toHTML(rendered), { indent_size: 2 })
@@ -45,8 +47,8 @@ function renderIndexPage (filter, route) {
 
 function renderTodoPage (id) {
   la(is.unemptyString(id), 'missing todo id', id)
-  const filter = (todo) => todo.id === id
+  const filter = todo => todo.id === id
   return renderIndexPage(filter)
 }
 
-module.exports = {renderIndexPage, renderTodoPage}
+module.exports = { renderIndexPage, renderTodoPage }
