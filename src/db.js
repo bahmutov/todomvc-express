@@ -1,6 +1,6 @@
-const R = require('ramda')
 const la = require('lazy-ass')
 const is = require('check-more-types')
+const pMinDelay = require('p-min-delay')
 
 const join = require('path').join
 const fs = require('fs-extra')
@@ -27,7 +27,7 @@ const loadTodos = () =>
       console.log('Cannot find todos file, returning new list')
       return saveTodos(initialTodos())
     }
-    return fs.readJson(todosPath)
+    return pMinDelay(fs.readJson(todosPath), 1000)
   })
 
 function saveTodos (items) {

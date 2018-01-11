@@ -32,7 +32,7 @@ describe('todomvc app', function () {
     cy.visit(baseUrl)
   })
 
-  it.only('can request data', () => {
+  it('can request data', () => {
     addTodo()
     addTodo()
     addTodo()
