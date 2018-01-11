@@ -37,12 +37,15 @@ function T () {
   return true
 }
 
+// returns a promise resolved with HTML
 function renderIndexPage (filter, route) {
   filter = filter || T
-  Todos.items = db.loadTodos().filter(filter)
-  const rendered = render(Todos, route)
-  const todosMarkup = beautify(toHTML(rendered), { indent_size: 2 })
-  return header + '\n' + todosMarkup + '\n' + footer
+  return db.loadTodos().then(items => {
+    Todos.items = items.filter(filter)
+    const rendered = render(Todos, route)
+    const todosMarkup = beautify(toHTML(rendered), { indent_size: 2 })
+    return header + '\n' + todosMarkup + '\n' + footer
+  })
 }
 
 function renderTodoPage (id) {

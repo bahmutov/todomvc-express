@@ -10,8 +10,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 function hasMethodField (req) {
-  return is.object(req.body) &&
-    is.unemptyString(req.body._method)
+  return is.object(req.body) && is.unemptyString(req.body._method)
 }
 
 function grabMethodFromBody (req, res) {
@@ -24,24 +23,24 @@ function grabMethodFromBody (req, res) {
 
 app.use(methodOverride(grabMethodFromBody))
 
-const {renderIndexPage, renderTodoPage} = require('./index-page')
+const { renderIndexPage, renderTodoPage } = require('./index-page')
 
 function sendIndexPage (req, res) {
-  res.send(renderIndexPage())
+  renderIndexPage().then(html => res.send(html))
 }
 
 function sendTodoPage (req, res) {
-  res.send(renderTodoPage(req.params.id))
+  renderTodoPage(req.params.id).then(html => res.send(html))
 }
 
 function activeTodosPage (req, res) {
-  const filter = (todo) => !todo.done
-  res.send(renderIndexPage(filter, req.url))
+  const filter = todo => !todo.done
+  renderIndexPage(filter, req.url).then(html => res.send(html))
 }
 
 function completedTodosPage (req, res) {
-  const filter = (todo) => todo.done
-  res.send(renderIndexPage(filter, req.url))
+  const filter = todo => todo.done
+  renderIndexPage(filter, req.url).then(html => res.send(html))
 }
 
 function toIndex (req, res) {
@@ -50,10 +49,11 @@ function toIndex (req, res) {
 
 function broadcast (req, res, next) {
   const db = require('./db')
-  const todos = db.loadTodos()
-  console.log('emitting %d todos', todos.length)
-  app.emit('todos', todos)
-  next()
+  db.loadTodos().then(todos => {
+    console.log('emitting %d todos', todos.length)
+    app.emit('todos', todos)
+    next()
+  })
 }
 
 function sendAppCss (req, res) {
@@ -70,7 +70,7 @@ function addTodo (req, res, next) {
   // sync for now
   if (is.unemptyString(req.body.what)) {
     const db = require('./db')
-    db.addTodo(req.body.what)
+    return db.addTodo(req.body.what).then(() => next())
   }
   next()
 }
@@ -81,7 +81,7 @@ function deleteTodo (req, res, next) {
   // sync for now
   if (is.unemptyString(req.body.id)) {
     const db = require('./db')
-    db.deleteTodo(req.body.id)
+    return db.deleteTodo(req.body.id).then(() => next())
   }
   next()
 }
@@ -92,7 +92,7 @@ function markTodo (req, res, next) {
   // sync for now
   if (is.unemptyString(req.body.id)) {
     const db = require('./db')
-    db.markTodo(req.body.id, req.body.done === 'true')
+    return db.markTodo(req.body.id, req.body.done === 'true').then(() => next())
   }
 
   next()
@@ -101,8 +101,7 @@ function markTodo (req, res, next) {
 function clearCompleted (req, res, next) {
   console.log('clearing completed todos')
   const db = require('./db')
-  db.clearCompleted()
-  next()
+  db.clearCompleted().then(() => next())
 }
 
 app.get('/', broadcast, sendIndexPage)
