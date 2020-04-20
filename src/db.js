@@ -13,7 +13,7 @@ la(is.fn(todoFactory), 'missing todo factory')
 // returns a couple of fake todos to seed the list
 function initialTodos () {
   const faker = require('fake-todos')
-  return faker(2)
+  return faker(20)
 }
 
 function reset () {
@@ -35,7 +35,7 @@ const loadTodos = () => {
 function saveTodos (items) {
   la(is.array(items), 'expected list of items, not', items)
   console.log('db: saved %d todo(s)', items.length)
-  return fs.writeJson(todosPath, items)
+  return fs.writeJson(todosPath, items, {spaces: 2})
 }
 
 function addTodo (what) {
