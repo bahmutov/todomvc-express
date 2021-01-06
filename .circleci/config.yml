@@ -12,4 +12,5 @@ workflows:
       - cypress/run:
           start: npm start
           wait-on: 'http://localhost:3000'
+          no-workspace: true
           # TODO trigger semantic release
