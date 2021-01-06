@@ -15,7 +15,8 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "deploy": "now-pipeline --test 'npm run prod-test'",
-    "prune-deploys": "now-pipeline-prune"
+    "prune-deploys": "now-pipeline-prune",
+    "dev": "start-test 3000 cy:open"
   },
   "repository": {
     "type": "git",
@@ -64,7 +65,8 @@
     "pre-git": "3.17.0",
     "prettier": "2.2.1",
     "semantic-release": "6.3.1",
-    "standard": "8.5.0"
+    "standard": "8.5.0",
+    "start-server-and-test": "1.11.7"
   },
   "config": {
     "pre-git": {
