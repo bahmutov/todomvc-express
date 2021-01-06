@@ -24,5 +24,21 @@ describe('TodoMVC API', () => {
         'match',
         /^[0-9a-f]{8}\b-[0-9a-f]{4}\b-[0-9a-f]{4}\b-[0-9a-f]{4}\b-[0-9a-f]{12}$/,
       )
+
+    cy.log('**render HTML**')
+    cy.request('/')
+      .its('body')
+      .then((html) => {
+        cy.document().then((doc) => {
+          doc.write(html)
+        })
+      })
+    // now that the server response is in the test runner
+    // let's query it like a normal site
+    cy.get('.todo-list li')
+      .should('have.length', 1)
+      .first()
+      .find('label')
+      .should('have.text', 'new todo')
   })
 })

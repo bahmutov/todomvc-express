@@ -10,8 +10,7 @@ Live demo at [todomvc-express.herokuapp.com/](https://todomvc-express.herokuapp.
 might be asleep, wait 10 seconds. Does not permanently store todos; they disappear when
 the dyno goes to sleep.
 
-Complete server-side rendering for TodoMVC using [ExpressJS](http://expressjs.com/)
-server and [virtual-dom](https://github.com/Matt-Esch/virtual-dom).
+Complete server-side rendering for TodoMVC using [ExpressJS](http://expressjs.com/) server and [virtual-dom](https://github.com/Matt-Esch/virtual-dom).
 
 In fact, NO client side
 JavaScript is allowed using
@@ -27,9 +26,17 @@ You can clone this repo and start the server locally
 
     npm start
 
-The open `localhost:3000` to play with the application. Local data is saved in `todos.json`.
-The Express server itself is defined in file [src/app.js](src/app.js) that you can reuse from
-other environments
+The open `localhost:3000` to play with the application. Local data is saved in `todos.json`. The Express server itself is defined in file [src/app.js](src/app.js) that you can reuse from other environments
+
+## Tests
+
+To run the server and the Cypress test
+
+```shell
+npm run dev
+```
+
+Find the tests in the [cypress/integration](./cypress/integration) folder. There are UI and API tests.
 
 ## Related
 
