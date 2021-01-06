@@ -1,4 +1,4 @@
-# todomvc-express [![CircleCI](https://circleci.com/gh/bahmutov/todomvc-express/master.svg?style=svg)](https://circleci.com/gh/bahmutov/todomvc-express/master)
+# todomvc-express [![CircleCI](https://circleci.com/gh/bahmutov/todomvc-express/tree/master.svg?style=svg)](https://circleci.com/gh/bahmutov/todomvc-express/tree/master)
 
 > TodoMVC with server-side rendering
 
