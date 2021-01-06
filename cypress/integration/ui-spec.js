@@ -1,7 +1,5 @@
+/// <reference types="cypress" />
 'use strict'
-
-/* eslint-env mocha */
-/* global cy, Cypress, expect */
 
 const random = () => Math.random().toString(16).substr(2)
 
