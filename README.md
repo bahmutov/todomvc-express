@@ -1,4 +1,5 @@
-# todomvc-express
+# todomvc-express [![CircleCI](https://circleci.com/gh/bahmutov/todomvc-express/master.svg?style=svg)](https://circleci.com/gh/bahmutov/todomvc-express/master)
+
 > TodoMVC with server-side rendering
 
 [![NPM][todomvc-express-icon] ][todomvc-express-url]
