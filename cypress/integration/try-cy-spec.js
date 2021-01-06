@@ -18,9 +18,8 @@ describe('TodoMVC', function () {
 describe('todomvc app', function () {
   const baseUrl = Cypress.env('HOST') || 'http://localhost:3000'
 
-  function addTodo (label = 'new todo') {
-    cy
-      .get('.new-todo')
+  function addTodo(label = 'new todo') {
+    cy.get('.new-todo')
       .type(`${label}{enter}`)
       .get('ul.todo-list')
       .find('li')
@@ -72,8 +71,7 @@ describe('todomvc app', function () {
   it('can view active todos', function () {
     cy.get('footer').contains('All').should('have.class', 'selected')
 
-    cy
-      .get('.new-todo')
+    cy.get('.new-todo')
       .type('active todo{enter}')
       .get('ul.todo-list')
       .find('li')
