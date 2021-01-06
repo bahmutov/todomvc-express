@@ -3,7 +3,6 @@
 
 [![NPM][todomvc-express-icon] ][todomvc-express-url]
 
-[![Build status][todomvc-express-ci-image] ][todomvc-express-ci-url]
 [![semantic-release][semantic-image] ][semantic-url]
 
 Live demo at [todomvc-express.herokuapp.com/](https://todomvc-express.herokuapp.com/) -
@@ -106,7 +105,5 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 [todomvc-express-icon]: https://nodei.co/npm/todomvc-express.svg?downloads=true
 [todomvc-express-url]: https://npmjs.org/package/todomvc-express
-[todomvc-express-ci-image]: https://travis-ci.org/bahmutov/todomvc-express.svg?branch=master
-[todomvc-express-ci-url]: https://travis-ci.org/bahmutov/todomvc-express
 [semantic-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [semantic-url]: https://github.com/semantic-release/semantic-release
