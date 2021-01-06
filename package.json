@@ -58,10 +58,11 @@
     "virtual-dom": "2.1.1"
   },
   "devDependencies": {
-    "cypress": "1.4.1",
+    "cypress": "6.2.1",
     "now-pipeline": "1.10.0",
     "npm-run-all": "4.1.2",
     "pre-git": "3.17.0",
+    "prettier": "2.2.1",
     "semantic-release": "6.3.1",
     "standard": "8.5.0"
   },
