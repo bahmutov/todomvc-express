@@ -1,4 +1,4 @@
-# todomvc-express [![CircleCI](https://circleci.com/gh/bahmutov/todomvc-express/tree/master.svg?style=svg)](https://circleci.com/gh/bahmutov/todomvc-express/tree/master) ![cypress version](https://img.shields.io/badge/cypress-9.4.1-brightgreen)
+# todomvc-express ![cypress version](https://img.shields.io/badge/cypress-9.4.1-brightgreen)
 
 > TodoMVC with server-side rendering
 
@@ -42,11 +42,11 @@ Find the tests in the [cypress/integration](./cypress/integration) folder. There
 
 I have written a couple of modules that help with TodoMVC applications.
 
-* [virtual-todos](https://github.com/bahmutov/virtual-todos) - generates Virtual Dom from todos
-* [fake-todos](https://github.com/bahmutov/fake-todos) to generate fake todo items
-* [todomvc-model](https://github.com/bahmutov/todomvc-model) is the model that keeps
+- [virtual-todos](https://github.com/bahmutov/virtual-todos) - generates Virtual Dom from todos
+- [fake-todos](https://github.com/bahmutov/fake-todos) to generate fake todo items
+- [todomvc-model](https://github.com/bahmutov/todomvc-model) is the model that keeps
   todo items and responds to outside events
-* [instant-vdom-todo](https://github.com/bahmutov/instant-vdom-todo) - instant web app
+- [instant-vdom-todo](https://github.com/bahmutov/instant-vdom-todo) - instant web app
   using ServiceWorker
 
 ## Emit
@@ -75,9 +75,9 @@ I have added a level of in-memory caching, see [src/cache.js](src/cache.js). Ins
 
 Author: Gleb Bahmutov &copy; 2016
 
-* [@bahmutov](https://twitter.com/bahmutov)
-* [glebbahmutov.com](http://glebbahmutov.com)
-* [blog](http://glebbahmutov.com/blog/)
+- [@bahmutov](https://twitter.com/bahmutov)
+- [glebbahmutov.com](http://glebbahmutov.com)
+- [blog](http://glebbahmutov.com/blog/)
 
 License: MIT - do anything with the code, but don't blame me if it does not work.
 
