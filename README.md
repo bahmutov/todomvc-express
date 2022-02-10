@@ -1,4 +1,4 @@
-# todomvc-express [![CircleCI](https://circleci.com/gh/bahmutov/todomvc-express/tree/master.svg?style=svg)](https://circleci.com/gh/bahmutov/todomvc-express/tree/master)
+# todomvc-express [![CircleCI](https://circleci.com/gh/bahmutov/todomvc-express/tree/master.svg?style=svg)](https://circleci.com/gh/bahmutov/todomvc-express/tree/master) ![cypress version](https://img.shields.io/badge/cypress-9.4.1-brightgreen)
 
 > TodoMVC with server-side rendering
 
