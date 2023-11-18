@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+import { recurse } from 'cypress-recurse'
+
 beforeEach(function () {
   const n = Cypress._.random(0, 5)
   cy.log(`will have ${n} todos`)
@@ -8,24 +10,26 @@ beforeEach(function () {
 })
 
 it('deletes all items', () => {
-  cy.get('.todo-list li')
-    // there might be no todos to delete
-    // so disable the built-in existence assertion
-    // inside the cy.get query command
-    .should(Cypress._.noop)
-    .then(($list) => {
-      if (!$list.length) {
-        cy.log('No todos, nothing to delete')
-      } else {
-        // click on each item's destroy button
-        $list.each((k, $el) => {
-          cy.wrap($el)
-            .find('.destroy')
-            // the element becomes visible only on hover
-            // so have to force it to click without
-            // checking visibility first
-            .click({ force: true })
-        })
-      }
-    })
+  // use cypress-recurse function "recurse"
+  // to delete the last Todo item
+  // until there are no items left
+  // make sure to confirm the N-1 todos remaining
+  // after clicking the destroy button
+  recurse(
+    () => cy.get('.todo-list li').should(Cypress._.noop).its('length'),
+    (n) => n === 0,
+    {
+      log: false,
+      // use higher timeout because deleting
+      // 5 items might take longer than the default command timeout
+      timeout: 6_000,
+      post({ value }) {
+        cy.get('.todo-list li').last().find('.destroy').click({ force: true })
+        cy.get('.todo-list li').should('have.length', value - 1)
+      },
+    },
+  )
+
+  // confirm there are no todos
+  cy.get('.todo-list li').should('not.exist')
 })
