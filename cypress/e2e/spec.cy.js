@@ -7,4 +7,16 @@ beforeEach(function () {
   cy.visit('/')
 })
 
-it('deletes all items', () => {})
+it('deletes all items', () => {
+  cy.get('.todo-list li')
+    .should(Cypress._.noop)
+    .then(($list) => {
+      if (!$list.length) {
+        cy.log('No todos, nothing to delete')
+      } else {
+        $list.each((k, $el) => {
+          cy.wrap($el).find('.destroy').click({ force: true })
+        })
+      }
+    })
+})
