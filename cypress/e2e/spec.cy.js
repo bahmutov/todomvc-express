@@ -13,19 +13,19 @@ it('deletes all items', () => {
     // so disable the built-in existence assertion
     // inside the cy.get query command
     .should(Cypress._.noop)
-    .then(($list) => {
-      if (!$list.length) {
+    .its('length')
+    .then((n) => {
+      if (!n) {
         cy.log('No todos, nothing to delete')
       } else {
-        // click on each item's destroy button
-        $list.each((k, $el) => {
-          cy.wrap($el)
-            .find('.destroy')
-            // the element becomes visible only on hover
-            // so have to force it to click without
-            // checking visibility first
-            .click({ force: true })
-        })
+        // repeat deleting the first item N times
+        // by going from the N to 0 out variable k
+        // gives the current number of items in the list
+        for (let k = n; k > 0; k -= 1) {
+          cy.get('.todo-list li:first').find('.destroy').click({ force: true })
+          // the page reloads, let's confirm we see k - 1 items
+          cy.get('.todo-list li').should('have.length', k - 1)
+        }
       }
     })
 })
