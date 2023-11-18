@@ -1,4 +1,4 @@
-# todomvc-express ![cypress version](https://img.shields.io/badge/cypress-9.4.1-brightgreen) [![ci](https://github.com/bahmutov/todomvc-express/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/bahmutov/todomvc-express/actions/workflows/ci.yml)
+# todomvc-express ![cypress version](https://img.shields.io/badge/cypress-13.5.1-brightgreen) [![ci](https://github.com/bahmutov/todomvc-express/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/bahmutov/todomvc-express/actions/workflows/ci.yml)
 
 > TodoMVC with server-side rendering
 

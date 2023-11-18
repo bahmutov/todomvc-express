@@ -16,7 +16,8 @@
     "cy:run": "cypress run",
     "deploy": "now-pipeline --test 'npm run prod-test'",
     "prune-deploys": "now-pipeline-prune",
-    "dev": "start-test 3000 cy:open"
+    "dev": "start-test 3000 cy:open",
+    "badges": "npx -p dependency-version-badge update-badge cypress"
   },
   "repository": {
     "type": "git",
@@ -59,7 +60,7 @@
     "virtual-dom": "2.1.1"
   },
   "devDependencies": {
-    "cypress": "9.4.1",
+    "cypress": "13.5.1",
     "now-pipeline": "1.10.0",
     "npm-run-all": "4.1.2",
     "pre-git": "3.17.0",
