@@ -29,7 +29,9 @@ const loadTodos = () => {
       const todos = initialTodos()
       return saveTodos(todos).then(() => todos)
     }
-    return pMinDelay(fs.readJson(todosPath), 1000)
+    // add a delay if needed to simulate slow network/server
+    // return pMinDelay(fs.readJson(todosPath), 1000)
+    return fs.readJson(todosPath)
   })
 }
 
