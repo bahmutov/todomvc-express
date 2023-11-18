@@ -69,22 +69,6 @@
     "standard": "8.5.0",
     "start-server-and-test": "1.11.7"
   },
-  "config": {
-    "pre-git": {
-      "commit-msg": [
-        "simple"
-      ],
-      "pre-commit": [
-        "npm test"
-      ],
-      "pre-push": [],
-      "post-commit": [],
-      "post-merge": []
-    }
-  },
-  "env": {
-    "NODE_ENV": "production"
-  },
   "release": {
     "analyzeCommits": "simple-commit-message"
   }
