@@ -11,14 +11,19 @@ const todoFactory = require('todomvc-model').utils.factory
 la(is.fn(todoFactory), 'missing todo factory')
 
 // returns a couple of fake todos to seed the list
-function initialTodos() {
+function initialTodos(n = 20) {
   const faker = require('fake-todos')
-  return faker(20)
+  return faker(n)
 }
 
-function reset() {
-  console.log('resetting todos')
-  return saveTodos([])
+function reset(options = {}) {
+  if (options && options.n) {
+    console.log('resetting todos to %d new ones', options.n)
+    return saveTodos(initialTodos(options.n))
+  } else {
+    console.log('resetting todos')
+    return saveTodos([])
+  }
 }
 
 const loadTodos = () => {

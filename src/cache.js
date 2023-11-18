@@ -2,7 +2,7 @@ const cacheManager = require('cache-manager')
 const memoryCache = cacheManager.caching({
   store: 'memory',
   max: 100,
-  ttl: 60 /* seconds */
+  ttl: 60 /* seconds */,
 })
 
 // "real" db
@@ -18,16 +18,16 @@ const invalidateTodos = () => memoryCache.del('todos')
 const loadTodos = () => memoryCache.wrap('todos', db.loadTodos)
 
 // actions that invalidate the cached resource, additions, deletions, etc
-const addTodo = what => invalidateTodos().then(() => db.addTodo(what))
+const addTodo = (what) => invalidateTodos().then(() => db.addTodo(what))
 
-const deleteTodo = id => invalidateTodos().then(() => db.deleteTodo(id))
+const deleteTodo = (id) => invalidateTodos().then(() => db.deleteTodo(id))
 
 const markTodo = (id, completed) =>
   invalidateTodos().then(() => db.markTodo(id, completed))
 
 const clearCompleted = () => invalidateTodos().then(db.clearCompleted)
 
-const reset = () => invalidateTodos().then(db.reset)
+const reset = (options) => invalidateTodos().then(() => db.reset(options))
 
 module.exports = {
   loadTodos,
@@ -35,5 +35,5 @@ module.exports = {
   deleteTodo,
   markTodo,
   clearCompleted,
-  reset
+  reset,
 }
