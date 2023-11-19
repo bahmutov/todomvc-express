@@ -76,7 +76,12 @@ function addTodo(req, res, next) {
 
   if (is.unemptyString(req.body.what)) {
     const db = require('./cache')
-    return db.addTodo(req.body.what).then(() => next())
+    // random delay between adding the todo and reloading
+    const delay = Math.round(Math.random() * 3_000)
+    return db.addTodo(req.body.what).then(() => {
+      console.log('sleeping for %d ms', delay)
+      setTimeout(next, delay)
+    })
   }
   next()
 }

@@ -1,35 +1,20 @@
 /// <reference types="cypress" />
 
-import { recurse } from 'cypress-recurse'
+// use the plugin cypress-time-marks in this spec
+import 'cypress-time-marks'
 
 beforeEach(function () {
-  const n = Cypress._.random(0, 5)
-  cy.log(`will have ${n} todos`)
-  cy.request('POST', '/reset', { n })
+  // start with zero todos
+  cy.request('POST', '/reset')
   cy.visit('/')
 })
 
-it('deletes all items', () => {
-  // use cypress-recurse function "recurse"
-  // to delete the last Todo item
-  // until there are no items left
-  // make sure to confirm the N-1 todos remaining
-  // after clicking the destroy button
-  recurse(
-    () => cy.get('.todo-list li').should(Cypress._.noop).its('length'),
-    (n) => n === 0,
-    {
-      log: false,
-      // use higher timeout because deleting
-      // 5 items might take longer than the default command timeout
-      timeout: 6_000,
-      post({ value }) {
-        cy.get('.todo-list li').last().find('.destroy').click({ force: true })
-        cy.get('.todo-list li').should('have.length', value - 1)
-      },
-    },
-  )
-
-  // confirm there are no todos
-  cy.get('.todo-list li').should('not.exist')
+it('quickly adds an item', () => {
+  // start measuring time before using cy.type
+  // and confirm the item becomes visible
+  // before 500ms elapses
+  cy.get('input.new-todo').timeMark('addStart').type('an item{enter}')
+  cy.contains('li.todo', 'an item')
+    .should('be.visible')
+    .timeSince('addStart', 'adding an item', 500, true)
 })
